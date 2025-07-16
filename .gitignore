@@ -2,3 +2,6 @@
 .DS_Store
 .env_shell.json
 .env
+.env.local.minio.n8n
+docker-compose.local.minio.n8n.yml
+.gitignore
