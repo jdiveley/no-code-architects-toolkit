@@ -41,7 +41,7 @@ docker compose -f docker-compose.local.minio.n8n.yml up -d
 
 Once all services are running, you can access:
 
-- **NCA Toolkit API**: http://localhost:8080
+- **NCA Toolkit API**: http://localhost:8880
 - **n8n Workflow Interface**: http://localhost:5678
 - **MinIO Console**: http://localhost:9001
   - Username: `minioadmin`
@@ -52,7 +52,7 @@ Once all services are running, you can access:
 Test the NCA Toolkit API:
 
 ```bash
-curl -H "x-api-key: local-dev-key-123" http://localhost:8080/v1/toolkit/test
+curl -H "x-api-key: local-dev-key-123" http://localhost:8880/v1/toolkit/test
 ```
 
 ---
@@ -65,8 +65,8 @@ The `.env.local.minio.n8n` file contains all necessary configuration:
 ```env
 APP_NAME=NCAToolkit
 APP_DEBUG=true
-APP_DOMAIN=localhost:8080
-APP_URL=http://localhost:8080
+APP_DOMAIN=localhost:8880
+APP_URL=http://localhost:8880
 API_KEY=local-dev-key-123
 ```
 
@@ -94,12 +94,12 @@ WEBHOOK_URL=http://localhost:5678/
 ### NCA Toolkit (Port 8080)
 - Built from local Dockerfile
 - Connects to MinIO for file storage
-- API accessible at http://localhost:8080
+- API accessible at http://localhost:8880
 - Uses local development API key: `local-dev-key-123`
 
 ### MinIO (Ports 9000, 9001)
 - **API Endpoint**: http://localhost:9000 (S3-compatible API)
-- **Web Console**: http://localhost:9001
+- **Web Console**: http://localhost:9002
 - **Bucket**: `nca-toolkit-local` (auto-created and configured as public)
 - **Credentials**: minioadmin / minioadmin123
 
@@ -137,7 +137,7 @@ docker compose -f docker-compose.local.minio.n8n.yml logs -f n8n
 ### Managing Storage
 
 #### Access MinIO Console
-1. Open http://localhost:9001
+1. Open http://localhost:9002
 2. Login with `minioadmin` / `minioadmin123`
 3. Browse the `nca-toolkit-local` bucket
 4. Upload/download files as needed
@@ -155,7 +155,7 @@ docker compose -f docker-compose.local.minio.n8n.yml up -d
 
 All services communicate through the `nca-network` Docker network:
 
-- **n8n → NCA Toolkit**: `http://ncat:8080`
+- **n8n → NCA Toolkit**: `http://ncat:8880`
 - **n8n → MinIO**: `http://minio:9000` (S3 API)
 - **NCA Toolkit → MinIO**: `http://minio:9000` (internal network)
 
