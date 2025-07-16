@@ -8,6 +8,9 @@ __pycache__/
 .env
 .env_variables.json
 .env_shell.json
+.env.local.minio.n8n
+.env.example
+docker-compose.local.minio.n8n.yml
 
 # Ignore version control and editor files
 .git/
